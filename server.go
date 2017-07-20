@@ -46,6 +46,7 @@ func main() {
 	})
 
 	e.Static("/", "public")
+	e.Static("/assets/js", "app/dist")
 
 	log.Fatal(e.Start(":8000"))
 }
