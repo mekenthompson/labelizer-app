@@ -1,0 +1,4 @@
+package: github.com/team-tissue/labelizer-app
+import:
+- package: github.com/labstack/echo
+  version: ~3.1

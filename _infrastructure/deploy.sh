@@ -3,7 +3,7 @@
 set -euf -o pipefail
 
 group="tissue"
-location='westus'
+location='southcentralus'
 cluster_name="tissue-k8s-cluster"
 name_prefix="k8s"
 new_name=$(echo $(mktemp -u ${name_prefix}XXXX) | tr '[:upper:]' '[:lower:]')
