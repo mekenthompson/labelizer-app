@@ -45,8 +45,12 @@ func main() {
 		return c.Render(http.StatusOK, "test.html", map[string]interface{}{})
 	})
 
-	e.Static("/", "public")
 	e.Static("/assets/js", "app/dist")
+
+	// Serve incoming routes from spa
+	for _, route := range []string{"setup", "/"} {
+		e.File(route, "public/index.html")
+	}
 
 	log.Fatal(e.Start(":8000"))
 }
