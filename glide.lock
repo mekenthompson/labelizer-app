@@ -1,17 +1,56 @@
-hash: 33bd338252a20f96183b209808bee3b18261a9d5ecf4a9b8c6d80722d6eab4a9
-updated: 2017-07-20T08:25:36.339160685-07:00
+hash: 43df4bad753708a448fb72c6a83cbe4dffb10809f9b573a7e7092a6b2046ceb2
+updated: 2017-07-24T15:43:54.414726076-07:00
 imports:
+- name: github.com/dgrijalva/jwt-go
+  version: 2268707a8f0843315e2004ee4f1d021dc08baedf
+- name: github.com/fsnotify/fsnotify
+  version: 4da3e2cfbabc9f751898f250b49f2439785783a1
+- name: github.com/hashicorp/hcl
+  version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
 - name: github.com/labstack/echo
   version: 1049c9613cd371b7ea8f219404c9a821734781ed
+  subpackages:
+  - middleware
 - name: github.com/labstack/gommon
   version: 779b8a8b9850a97acba6a3fe20feb628c39e17c1
   subpackages:
+  - bytes
   - color
   - log
+  - random
+- name: github.com/magiconair/properties
+  version: 51463bfca2576e06c62a8504b5c0f06d61312647
 - name: github.com/mattn/go-colorable
   version: 3fa8c76f9daed4067e4a806fb7e4dc86455c6d6a
 - name: github.com/mattn/go-isatty
   version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
+- name: github.com/mitchellh/mapstructure
+  version: d0303fe809921458f417bcf828397a65db30a7e4
+- name: github.com/pelletier/go-buffruneio
+  version: c37440a7cf42ac63b919c752ca73a85067e05992
+- name: github.com/pelletier/go-toml
+  version: fe7536c3dee2596cdd23ee9976a17c22bdaae286
+- name: github.com/spf13/afero
+  version: 9be650865eab0c12963d8753212f4f9c66cdcf12
+  subpackages:
+  - mem
+- name: github.com/spf13/cast
+  version: acbeb36b902d72a7a4c18e8f3241075e7ab763e4
+- name: github.com/spf13/jwalterweatherman
+  version: 0efa5202c04663c757d84f90f5219c1250baf94f
+- name: github.com/spf13/pflag
+  version: e57e3eeb33f795204c1ca35f56c44f83227c6e66
+- name: github.com/spf13/viper
+  version: c1de95864d73a5465492829d7cb2dd422b19ac96
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasttemplate
@@ -25,4 +64,11 @@ imports:
   version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: 4e9ab9ee170f2a39bd66c92b3e0a47ff47a4bc77
+  subpackages:
+  - transform
+  - unicode/norm
+- name: gopkg.in/yaml.v2
+  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports: []

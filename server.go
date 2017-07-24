@@ -1,56 +1,71 @@
 package main
 
 import (
-	"html/template"
-	"io"
 	"log"
-	"net/http"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
+	"github.com/spf13/viper"
+	"fmt"
+	"os"
+	"flag"
+	"path/filepath"
+	"path"
 )
 
-// TemplateRenderer is a custom html/template renderer for Echo framework
-type TemplateRenderer struct {
-	templates *template.Template
+const (
+	CONFIG_PORT="port"
+)
+
+func init() {
+	initConfig()
 }
 
-// Render renders a template document
-func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+// initConfig reads in config file and ENV variables if set.
+func initConfig() {
+	cfgFilePath := *flag.String("config", ".labelizer.yml", "config file path")
+	fmt.Println(cfgFilePath)
+	flag.Parse()
 
-	// Add global methods if data is a map
-	if viewContext, isMap := data.(map[string]interface{}); isMap {
-		viewContext["reverse"] = Reverse
+	dir, _ := os.Getwd()
+
+	if !filepath.IsAbs(cfgFilePath){
+		cfgFilePath = path.Join(dir, cfgFilePath)
 	}
 
-	return t.templates.ExecuteTemplate(w, name, data)
-}
-
-func Reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
+	if cfgFilePath == "" {
+		// Use config file from the flag.
+		cfgFilePath =  path.Join(dir, ".labelizer.yml")
 	}
-	return string(r)
+
+	viper.SetConfigFile(cfgFilePath)
+	viper.SetConfigType("yml")
+	viper.AutomaticEnv() // read in environment variables that match
+	viper.SetDefault(CONFIG_PORT, "8000")
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	} else {
+		fmt.Println(err)
+	}
 }
 
 func main() {
 	e := echo.New()
-	renderer := &TemplateRenderer{
-		templates: template.Must(template.ParseGlob("_templates/*.html")),
-	}
-	e.Renderer = renderer
 
-	// Named route "foobar"
-	e.GET("/template/test", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "test.html", map[string]interface{}{})
-	})
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
 	e.Static("/assets/js", "app/dist")
+
+	r := e.Group("/api")
+	r.Use(middleware.JWT([]byte("secret")))
 
 	// Serve incoming routes from spa
 	for _, route := range []string{"setup", "/"} {
 		e.File(route, "public/index.html")
 	}
 
-	log.Fatal(e.Start(":8000"))
+	log.Fatal(e.Start(":" + viper.Get(CONFIG_PORT).(string)))
 }
