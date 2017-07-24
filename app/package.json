@@ -4,21 +4,32 @@
   "description": "frontend for labelizer app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress --watch",
+    "start": "webpack-dev-server --open"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@types/react": "^15.0.38",
+    "@types/react-bootstrap": "0.0.52",
     "@types/react-dom": "^15.5.1",
     "@types/react-router-dom": "^4.0.7",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.2.1",
+    "css-loader": "^0.28.4",
+    "html-webpack-plugin": "^2.29.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
-    "typescript": "^2.4.2"
+    "style-loader": "^0.18.2",
+    "typescript": "^2.4.2",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
   }
 }

@@ -1,39 +1,27 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require("path")
 
 module.exports = {
     entry: "./src/index.tsx",
     output: {
-        filename: "app.js",
+        filename: "app.[chunkhash].js",
         path: __dirname + "/dist"
     },
 
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
-    devServer: {
-        contentBase: './dist'
-    },
-
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".json", ".css", ".scss"],
+        extensions: [".ts", ".tsx", ".js", ".json"]
     },
 
     module: {
         rules: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            {
-                test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
-            },
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
-            },
-
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
@@ -50,8 +38,13 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
-
-    plugins: [new HtmlWebpackPlugin({
-        template: 'index.html'
-    })],
+    plugins: [
+        function() {
+        this.plugin("done", function(stats) {
+            require("fs").writeFileSync(
+                path.join(__dirname, "build", "stats.json"),
+                JSON.stringify(stats.toJson()));
+        });
+        }
+    ]
 };
