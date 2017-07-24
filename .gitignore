@@ -23,4 +23,5 @@ vendor/
 
 bin/
 
-.labelizer
+.labelizer*
+!.labelizer.sample.yml
