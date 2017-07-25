@@ -3,3 +3,9 @@ import:
 - package: github.com/labstack/echo
   version: ~3.1
 - package: github.com/spf13/viper
+- package: github.com/dgrijalva/jwt-go
+  version: ^3.0.0
+- package: github.com/google/go-github
+  subpackages:
+  - github
+- package: golang.org/x/oauth2

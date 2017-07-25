@@ -11,6 +11,7 @@ import (
 	"flag"
 	"path/filepath"
 	"path"
+	"github.com/team-tissue/labelizer-app/api/auth"
 )
 
 const (
@@ -66,6 +67,9 @@ func main() {
 	for _, route := range []string{"setup", "/"} {
 		e.File(route, "public/index.html")
 	}
+
+	e.GET("/auth/github/signin", auth.Challenge)
+	e.GET("/auth/github/code", auth.FetchCode)
 
 	log.Fatal(e.Start(":" + viper.Get(CONFIG_PORT).(string)))
 }

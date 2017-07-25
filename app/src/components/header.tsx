@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom"
-import { Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap"
+import { Navbar, Nav } from "react-bootstrap"
 
 export interface HeaderProps { }
 
@@ -21,6 +21,9 @@ export class Header extends React.Component<HeaderProps, undefined> {
                         </li>
                         <li>
                             <a className="nav-link" href="https://github.com/apps/labelizer">Install</a>
+                        </li>
+                        <li>
+                            <a className="nav-link" href="/auth/github/signin">SignIn</a>
                         </li>
                     </Nav>
                 </Navbar.Collapse>

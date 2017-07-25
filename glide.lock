@@ -1,10 +1,22 @@
-hash: 43df4bad753708a448fb72c6a83cbe4dffb10809f9b573a7e7092a6b2046ceb2
-updated: 2017-07-24T15:43:54.414726076-07:00
+hash: e91b6b633892135c858d83bbd8cf06cb62c3f18cabf5f4820d511f7a14871533
+updated: 2017-07-24T19:03:57.763887136-07:00
 imports:
 - name: github.com/dgrijalva/jwt-go
-  version: 2268707a8f0843315e2004ee4f1d021dc08baedf
+  version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
+- name: github.com/golang/protobuf
+  version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
+  subpackages:
+  - proto
+- name: github.com/google/go-github
+  version: fb256a0e9b341e277520f4d811b6dc6e5d4aa481
+  subpackages:
+  - github
+- name: github.com/google/go-querystring
+  version: 53e6ce116135b80d037921a7fdd5138cf32d7a8a
+  subpackages:
+  - query
 - name: github.com/hashicorp/hcl
   version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
   subpackages:
@@ -60,6 +72,15 @@ imports:
   subpackages:
   - acme
   - acme/autocert
+- name: golang.org/x/net
+  version: ab5485076ff3407ad2d02db054635913f017b0ed
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/oauth2
+  version: b53b38ad8a6435bd399ea76d0fa74f23149cca4e
+  subpackages:
+  - internal
 - name: golang.org/x/sys
   version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
   subpackages:
@@ -69,6 +90,18 @@ imports:
   subpackages:
   - transform
   - unicode/norm
+- name: google.golang.org/appengine
+  version: ad2570cd3913654e00c5f0183b39d2f998e54046
+  subpackages:
+  - internal
+  - internal/app_identity
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/modules
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
 - name: gopkg.in/yaml.v2
   version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports: []

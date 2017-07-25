@@ -1,1 +1,7 @@
 port: "8000"
+ghClientId: ""
+ghClientSecret: ""
+ghWebHookSecret: ""
+ghOauthRedirectUri: "http://localhost:8000/auth/github"
+oauthLandingRedirectUri: "http://localhost:8000/"
+jwtSecret: ""
