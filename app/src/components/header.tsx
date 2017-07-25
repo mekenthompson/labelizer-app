@@ -1,10 +1,15 @@
 import * as React from "react";
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { Navbar, Nav } from "react-bootstrap"
+import { Token } from "../auth/token"
 
 export interface HeaderProps { }
 
 export class Header extends React.Component<HeaderProps, undefined> {
+    handleLogout() {
+        Token.clear()
+    }
+
     render() {
         return (
             <Navbar inverse collapseOnSelect fixedTop>
@@ -17,13 +22,12 @@ export class Header extends React.Component<HeaderProps, undefined> {
                 <Navbar.Collapse>
                     <Nav pullRight>
                         <li>
-                            <Link className="nav-link" to="/setup">Setup</Link>
+                            <a className="nav-link" href="https://github.com/apps/labelizer">Install Labelizer</a>
                         </li>
                         <li>
-                            <a className="nav-link" href="https://github.com/apps/labelizer">Install</a>
-                        </li>
-                        <li>
-                            <a className="nav-link" href="/auth/github/signin">SignIn</a>
+                            { !Token.isAuthenticated() ? 
+                                (<a className="nav-link" href="/auth/github/signin">SignIn</a>) : 
+                                (<a className="nav-link" href="/" onClick={this.handleLogout}>Logout</a>)}
                         </li>
                     </Nav>
                 </Navbar.Collapse>
