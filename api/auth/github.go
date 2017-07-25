@@ -1,33 +1,33 @@
 package auth
 
 import (
-	"github.com/labstack/echo"
-	"net/http"
-	"net/url"
-	"github.com/spf13/viper"
+	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"github.com/dgrijalva/jwt-go"
-	"time"
-	"context"
 	"github.com/google/go-github/github"
+	"github.com/labstack/echo"
+	"github.com/spf13/viper"
 	"golang.org/x/oauth2"
+	"io/ioutil"
+	"net/http"
+	"net/url"
+	"time"
 )
 
 const (
-	GH_AUTHORIZE = "https://github.com/login/oauth/authorize"
-	GH_TOKEN = "https://github.com/login/oauth/access_token"
-	CONFIG_GH_CLIENT_ID = "ghClientId"
-	CONFIG_GH_CLIENT_SECRET = "ghClientSecret"
-	CONFIG_GH_REDIRECT = "ghOauthRedirectUri"
+	GH_AUTHORIZE             = "https://github.com/login/oauth/authorize"
+	GH_TOKEN                 = "https://github.com/login/oauth/access_token"
+	CONFIG_GH_CLIENT_ID      = "ghClientId"
+	CONFIG_GH_CLIENT_SECRET  = "ghClientSecret"
+	CONFIG_GH_REDIRECT       = "ghOauthRedirectUri"
 	CONFIG_OAUTH_LANDING_URI = "oauthLandingRedirectUri"
-	CONFIG_JWT_SECRET = "jwtSecret"
+	CONFIG_JWT_SECRET        = "jwtSecret"
 )
 
 // Challenge will redirect a user to authenticate with Github
 func Challenge(c echo.Context) error {
-	authorizeUrl, err := url.Parse(GH_AUTHORIZE);
+	authorizeUrl, err := url.Parse(GH_AUTHORIZE)
 	if err != nil {
 		return err
 	}
@@ -77,7 +77,7 @@ func FetchCode(c echo.Context) error {
 		return fmt.Errorf("%s: %s", ghError, respValues.Get("error-description"))
 	}
 
-	landing, err := url.Parse(viper.GetString(CONFIG_OAUTH_LANDING_URI));
+	landing, err := url.Parse(viper.GetString(CONFIG_OAUTH_LANDING_URI))
 	if err != nil {
 		return err
 	}
@@ -101,7 +101,7 @@ func FetchCode(c echo.Context) error {
 	return nil
 }
 
-func getGhUser(accessToken string) (*github.User, error){
+func getGhUser(accessToken string) (*github.User, error) {
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: accessToken},

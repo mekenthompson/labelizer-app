@@ -3,19 +3,19 @@ package main
 import (
 	"log"
 
+	"flag"
+	"fmt"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/spf13/viper"
-	"fmt"
-	"os"
-	"flag"
-	"path/filepath"
-	"path"
 	"github.com/team-tissue/labelizer-app/api/auth"
+	"os"
+	"path"
+	"path/filepath"
 )
 
 const (
-	CONFIG_PORT="port"
+	CONFIG_PORT = "port"
 )
 
 func init() {
@@ -30,13 +30,13 @@ func initConfig() {
 
 	dir, _ := os.Getwd()
 
-	if !filepath.IsAbs(cfgFilePath){
+	if !filepath.IsAbs(cfgFilePath) {
 		cfgFilePath = path.Join(dir, cfgFilePath)
 	}
 
 	if cfgFilePath == "" {
 		// Use config file from the flag.
-		cfgFilePath =  path.Join(dir, ".labelizer.yml")
+		cfgFilePath = path.Join(dir, ".labelizer.yml")
 	}
 
 	viper.SetConfigFile(cfgFilePath)
@@ -61,7 +61,7 @@ func main() {
 	e.Static("/assets/js", "app/dist")
 
 	r := e.Group("/api")
-	r.Use(middleware.JWT([]byte("secret")))
+	r.Use(middleware.JWT([]byte(auth.CONFIG_JWT_SECRET)))
 
 	// Serve incoming routes from spa
 	for _, route := range []string{"setup", "/"} {
