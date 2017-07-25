@@ -1,0 +1,81 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2017-07-25T23:48:54Z
+  generation: 1
+  labels:
+    chart: wrinkled-walrus-0.1.0
+  name: wrinkled-walrus-wrinkled-walrus
+  namespace: default
+  resourceVersion: "33032"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/wrinkled-walrus-wrinkled-walrus
+  uid: d158ca7a-7193-11e7-a32c-000d3a35c77e
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wrinkled-walrus-wrinkled-walrus
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wrinkled-walrus-wrinkled-walrus
+    spec:
+      containers:
+      - image: xgsnq27y6ymrm.azurecr.io/draft/wrinkled-walrus:74a3216a4098fc51865c8276b04a2aba9fb82974
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: wrinkled-walrus
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: 2017-07-25T23:48:54Z
+    lastUpdateTime: 2017-07-25T23:48:54Z
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 1
+  replicas: 2
+  unavailableReplicas: 2
+  updatedReplicas: 2

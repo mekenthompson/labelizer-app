@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-07-25T23:48:54Z
+  labels:
+    chart: wrinkled-walrus-0.1.0
+  name: wrinkled-walrus-wrinkled-walrus
+  namespace: default
+  resourceVersion: "33009"
+  selfLink: /api/v1/namespaces/default/services/wrinkled-walrus-wrinkled-walrus
+  uid: d156e00e-7193-11e7-a32c-000d3a35c77e
+spec:
+  clusterIP: 10.0.78.57
+  ports:
+  - name: golang
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: wrinkled-walrus-wrinkled-walrus
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
